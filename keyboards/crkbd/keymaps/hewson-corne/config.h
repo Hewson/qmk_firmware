@@ -23,7 +23,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //#define USE_MATRIX_I2C
 
 /* Select hand configuration */
-
 //#define MASTER_LEFT
 //#define MASTER_RIGHT
 //#define SPLIT_USB_DETECT
@@ -31,12 +30,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define SPLIT_HAND_PIN D5
 
-#define TAPPING_TERM 190
+#define TAPPING_TERM 170
 
 // Enable rapid switch from tap to hold, disables double tap hold auto-repeat.
 #define QUICK_TAP_TERM 0
 #define COMBO_TERM 35
-#define PERMISSIVE_HOLD
+#undef PERMISSIVE_HOLD
 
 #define MOUSEKEY_DELAY 7
 #define MOUSEKEY_MOVE_DELTA 1
@@ -50,9 +49,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define NO_AUTO_SHIFT_ALPHA
 #define AUTO_SHIFT_TIMEOUT 150
 
+//Save space
 #define NO_ACTION_MACRO
 #define NO_ACTION_FUNCTION
-
+#undef LOCKING_SUPPORT_ENABLE
+#undef LOCKING_RESYNC_ENABLE
+#define LAYER_STATE_8BIT
 #ifndef NO_DEBUG
 #define NO_DEBUG
 #endif // !NO_DEBUG

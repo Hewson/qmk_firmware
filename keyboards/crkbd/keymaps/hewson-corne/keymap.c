@@ -114,7 +114,7 @@ HYPR_T(KC_ESC),MEH_T(KC_A),LT(2,KC_S),LT(3,KC_D),LT(1,KC_F),KC_G,               
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      KC_RAY,  KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                               KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┘                          └───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                               CMD_BACK,LGUI_T(KC_BSPC),KC_LSFT,                 KC_SPC,  DELWORD, KC_MPLY
+                               CMD_BACK, LGUI_T(KC_BSPC),KC_LSFT,                 KC_SPC, DELWORD,  KC_MPLY
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
@@ -132,7 +132,7 @@ HYPR_T(KC_ESC),MEH_T(KC_A),LT(2,KC_S),LT(3,KC_D),LT(1,KC_F),KC_G,               
 
   [_RAISE] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     KC_NO,   KC_NO,   KC_NO,RGB_MODE_PLAIN,KC_RFRSH,QK_BOOT,                        KC_PUP,  KC_BTN1, KC_MS_U, KC_BTN2, KC_WH_R, KC_WH_L,
+     KC_NO,   KC_NO, KC_NO,RGB_MODE_PLAIN,KC_RFRSH,QK_BOOT,                        KC_PUP,  KC_BTN1, KC_MS_U, KC_BTN2, KC_WH_R, KC_WH_L,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      KC_LCTL, KC_LSFT, KC_LALT, KC_LGUI, KC_NO,   KC_NO,                             KC_PDOWN, KC_MS_L, KC_MS_D, KC_MS_R, KC_NO,   KC_NO, 
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
@@ -160,33 +160,56 @@ void matrix_scan_user(void) {
 }
 
 uint16_t achordion_timeout(uint16_t tap_hold_keycode) {
-  return 600;
+  return 500;
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (!process_achordion(keycode, record)) { return false; }
-/*    switch (keycode) {
-      case LGUI_T(CMD_BACK):
+    switch (keycode) {
+      case HYPR_T(KC_ESC):
         if (record->tap.count && record->event.pressed) {
-            tap_code16(LGUI(KC_LBRC));
-            return false;        // Return false to ignore further processing of key
-        } 
-        break;
+            return true;
+        } else if (record->event.pressed) {
+            rgblight_sethsv(HSV_CYAN);
+            break;
+        }
+        rgblight_sethsv (HSV_OFF);
+        return true;
+
+      case MEH_T(KC_A):
+        if (record->tap.count && record->event.pressed) {
+            return true;
+        } else if (record->event.pressed) {
+            rgblight_sethsv(HSV_CYAN);
+            break;
+        }
+        rgblight_sethsv (HSV_OFF);
+        return true;
+
+      case LGUI_T(KC_BSPC):
+        if (record->tap.count && record->event.pressed) {
+          return true;
+        } else if (record->event.pressed) {
+          rgblight_sethsv(HSV_CYAN);
+          break;
+        }
+        rgblight_sethsv (HSV_OFF);
+        return true; 
     }
-*/
+  
   return true;
 }
 
 layer_state_t layer_state_set_user(layer_state_t state) {
     switch (get_highest_layer(state)) {
         case _RAISE:
-            rgblight_sethsv(HSV_GOLDENROD);
+            rgblight_sethsv(HSV_PURPLE);
             break;
         case _LOWER:
             rgblight_sethsv(HSV_AZURE);
             break;
         case _ADJUST:
-            rgblight_sethsv(HSV_CYAN);
+            rgblight_sethsv(HSV_BLUE);
             break;        
         default:
             rgblight_sethsv (HSV_OFF);
