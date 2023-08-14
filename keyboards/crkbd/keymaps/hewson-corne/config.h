@@ -30,11 +30,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define SPLIT_HAND_PIN D5
 
-#define TAPPING_TERM 170
+#define TAPPING_TERM 200
 
 // Enable rapid switch from tap to hold, disables double tap hold auto-repeat.
 #define QUICK_TAP_TERM 0
-#define COMBO_TERM 35
+#define COMBO_TERM 25
 #undef PERMISSIVE_HOLD
 
 #define MOUSEKEY_DELAY 7
@@ -47,7 +47,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define TAPPING_TOGGLE 3
 #define NO_AUTO_SHIFT_ALPHA
-#define AUTO_SHIFT_TIMEOUT 150
+#define NO_AUTO_SHIFT_NUMERIC
+#define AUTO_SHIFT_TIMEOUT TAPPING_TERM
 
 //Save space
 #define NO_ACTION_MACRO
